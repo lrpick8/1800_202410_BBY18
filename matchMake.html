@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap Library CSS CDN go here -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <!-- Boostrap Library JS CDN  go here -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Other libraries go here -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+  </head>
+
+  <body>
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+
+    <h1>Sport</h1>
+    <div>
+      <datalist id="suggestions">
+        <option>Soccer</option>
+        <option>Basketball</option>
+        <option>Tennis</option>
+        <option>Baseball</option>
+        <option>Volleyball</option>
+        <option>Swimming</option>
+        <option>Running</option>
+        <option>Boxing</option>
+        <option>Golf</option>
+        <option>Cricket</option>
+        <option>Table Tennis</option>
+        <option>Badminton</option>
+        <option>Rugby</option>
+        <option>Hockey</option>
+        <option>Gymnastics</option>
+        <option>Skateboarding</option>
+        <option>Surfing</option>
+        <option>Rock Climbing</option>
+        <option>Cycling</option>
+        <option>Martial Arts</option>
+      </datalist>
+      <input autocomplete="on" list="suggestions" />
+    </div>
+
+    <h1>Location</h1>
+    <div class="card-body form-group dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenu"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Distance
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li>
+          <button class="dropdown-item" type="button" id="50km">
+            Within 50km
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="100km">
+            Within 100km
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="anywhere">
+            Anywhere within my City
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <h1>Skill Level</h1>
+    <div class="card-body form-group">
+      <div class="btn-group" role="group" aria-label="Skill level selection">
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillBeginner"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="skillBeginner"
+          >Beginner</label
+        >
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillSkilled"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="skillSkilled"
+          >Skilled</label
+        >
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillProfessional"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="skillProfessional"
+          >Professional</label
+        >
+      </div>
+    </div>
+
+    <h1>Mode</h1>
+    <div class="card-body form-group">
+      <div class="btn-group" role="group" aria-label="Mode selection">
+        <input
+          type="radio"
+          class="btn-check"
+          name="mode"
+          id="modeUnranked"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="modeUnranked"
+          >Unranked</label
+        >
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="mode"
+          id="modeRanked"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="modeRanked">Ranked</label>
+      </div>
+    </div>
+
+    <h1>Matchtype</h1>
+    <div class="card-body form-group">
+      <div class="btn-group" role="group" aria-label="Matchtype selection">
+        <input
+          type="radio"
+          class="btn-check"
+          name="matchtype"
+          id="match1v1"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="match1v1">1v1</label>
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="matchtype"
+          id="matchTeams"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="matchTeams">Teams</label>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="card-body d-grid gap-2">
+      <button id="submit" class="btn btn-primary" type="button">
+        Find Players
+      </button>
+    </div>
+
+    <footer class="navbar justify-content-evenly bg-info fixed-bottom">
+      <div class="container py-3">
+        <span class="material-icons">search</span>
+        <span class="material-icons">map</span>
+        <span class="material-icons">message</span>
+      </div>
+    </footer>
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script src="./scripts/script.js"></script> -->
+  </body>
+</html>
