@@ -37,19 +37,18 @@
     <!-- Stuff for body goes here -->
     <header class="navbar justify-content-evenly bg-info fixed-top">
       <div class="container py-2">
-        <span class="material-icons">person</span>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="material-icons">person</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
+            </ul>
+          </div>
         <span class="material-icons">settings</span>
       </div>
     </header>
-
-    <div id="welcomeMessage" class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to our Sports Matching App!</h1>
-        <p class="col-md-8 fs-4">Click below to start now!</p>
-
-        <a class="btn btn-primary btn-lg" type="button" href="../login.html">Login</a>
-      </div>
-    </div>
 
     <button type="button" class="btn btn-info" id="findmatch">Find Match</button>
 
