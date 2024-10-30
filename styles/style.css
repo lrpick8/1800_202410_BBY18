@@ -1,1 +1,10 @@
+    #findmatch {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50vh;
+    }
 
+    .p-5 mb-4 bg-light rounded-3 {
+        text-align: center;
+    }
