@@ -28,70 +28,24 @@
 
     <link rel="stylesheet" href="./styles/style.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
   </head>
 
   <body>
-    <form id="loginform" onsubmit="return validateForm()">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputName">Full Name</label>
-          <input type="text" class="form-control" id="inputName" placeholder="Name" required>
-        </div>
-    
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
-        </div>
-    
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">Password</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="Password" required>
-        </div>
-      </div>
-    
-      <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
-      </div>
-    
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity" required>
-        </div>
-    
-        <div class="form-group col-md-4">
-          <label for="inputState">State</label>
-          <select id="inputState" class="form-control" required>
-            <option value="" disabled selected>Choose...</option>
-            <option>BC</option>
-          </select>
-        </div>
-    
-        <div class="form-group col-md-2">
-          <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip" required>
-        </div>
-      </div>
-    
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck" required>
-          <label class="form-check-label" for="gridCheck">
-            Agree to terms and conditions
-          </label>
-        </div>
-      </div>
-    
-      <button type="submit" class="btn btn-primary btn-lg">Login</button>
-    </form>
-    
-    <script>
-      function validateForm() {
-          window.location.href = "../main.html";
-          return false;
-      }
-      </script>
+
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+
+    <script src="./scripts/firebaseAPI_BBY18.js"></script>
+    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/script.js"></script>
       
   </body>
 </html>
