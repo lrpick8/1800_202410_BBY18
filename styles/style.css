@@ -8,12 +8,12 @@
 
 /* matchMake.html styles */
 
-   #findmatch {
-        display: block;
+   /* #findmatch {
+        display: table-column;
         margin-left: auto;
         margin-right: auto;
         margin-top: 50vh;
-    }
+    } */
 
 /* login.html styles */
 

@@ -28,9 +28,22 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-
+    <!-- ----------------------------------------------------
+    Firebase 8 Library related CSS, JS, JQuery go here -->
+    <!-------------------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css" />
+    <!-- <link rel="stylesheet" href="./styles/style.css" /> -->
   </head>
 
   <body>
@@ -38,10 +51,34 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-
-    <h1>Sport</h1>
+    <!-- <header class="navbar justify-content-evenly bg-info fixed-top">
+      <div class="container py-2">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="material-icons">person</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
+            <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
+          </ul>
+        </div>
+        <span class="material-icons">settings</span>
+      </div>
+    </header> -->
     <div>
+      <h1>Sport</h1>
+      <input autocomplete="on" list="suggestions" id="sport" />
       <datalist id="suggestions">
+        <option>Soccer</option>
+        <option>Basketball</option>
+        <option>Soccer</option>
+        <option>Basketball</option>
         <option>Soccer</option>
         <option>Basketball</option>
         <option>Tennis</option>
@@ -62,8 +99,9 @@
         <option>Rock Climbing</option>
         <option>Cycling</option>
         <option>Martial Arts</option>
+        <option>Martial Arts</option>
+        <option>Martial Arts</option>
       </datalist>
-      <input autocomplete="on" list="suggestions" />
     </div>
 
     <h1>Location</h1>
@@ -73,122 +111,124 @@
         type="button"
         id="dropdownMenu"
         data-bs-toggle="dropdown"
-        aria-expanded="false"
       >
         Distance
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
         <li>
-          <button class="dropdown-item" type="button" id="50km">
+          <button
+            class="dropdown-item location-option"
+            type="button"
+            data-value="50km"
+          >
             Within 50km
           </button>
         </li>
         <li>
-          <button class="dropdown-item" type="button" id="100km">
+          <button
+            class="dropdown-item location-option"
+            type="button"
+            data-value="100km"
+          >
             Within 100km
           </button>
         </li>
         <li>
-          <button class="dropdown-item" type="button" id="anywhere">
+          <button
+            class="dropdown-item location-option"
+            type="button"
+            data-value="anywhere"
+          >
             Anywhere within my City
           </button>
         </li>
       </ul>
+      <input type="hidden" id="location" />
     </div>
 
     <h1>Skill Level</h1>
     <div class="card-body form-group">
-      <div class="btn-group" role="group" aria-label="Skill level selection">
-        <input
-          type="radio"
-          class="btn-check"
-          name="skillLevel"
-          id="skillBeginner"
-          autocomplete="off"
-          checked
-        />
-        <label class="btn btn-outline-primary" for="skillBeginner"
-          >Beginner</label
-        >
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="skillLevel"
-          id="skillSkilled"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary" for="skillSkilled"
-          >Skilled</label
-        >
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="skillLevel"
-          id="skillProfessional"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary" for="skillProfessional"
-          >Professional</label
-        >
-      </div>
+      <input
+        type="radio"
+        class="btn-check"
+        name="skillLevel"
+        id="skillBeginner"
+        value="Beginner"
+        checked
+      />
+      <label class="btn btn-outline-primary" for="skillBeginner"
+        >Beginner</label
+      >
+      <input
+        type="radio"
+        class="btn-check"
+        name="skillLevel"
+        id="skillSkilled"
+        value="Skilled"
+      />
+      <label class="btn btn-outline-primary" for="skillSkilled">Skilled</label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="skillLevel"
+        id="skillProfessional"
+        value="Professional"
+      />
+      <label class="btn btn-outline-primary" for="skillProfessional"
+        >Professional</label
+      >
     </div>
 
     <h1>Mode</h1>
     <div class="card-body form-group">
-      <div class="btn-group" role="group" aria-label="Mode selection">
-        <input
-          type="radio"
-          class="btn-check"
-          name="mode"
-          id="modeUnranked"
-          autocomplete="off"
-          checked
-        />
-        <label class="btn btn-outline-primary" for="modeUnranked"
-          >Unranked</label
-        >
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="mode"
-          id="modeRanked"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary" for="modeRanked">Ranked</label>
-      </div>
+      <input
+        type="radio"
+        class="btn-check"
+        name="mode"
+        id="modeUnranked"
+        value="Unranked"
+        checked
+      />
+      <label class="btn btn-outline-primary" for="modeUnranked">Unranked</label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="mode"
+        id="modeRanked"
+        value="Ranked"
+      />
+      <label class="btn btn-outline-primary" for="modeRanked">Ranked</label>
     </div>
 
     <h1>Matchtype</h1>
     <div class="card-body form-group">
-      <div class="btn-group" role="group" aria-label="Matchtype selection">
-        <input
-          type="radio"
-          class="btn-check"
-          name="matchtype"
-          id="match1v1"
-          autocomplete="off"
-          checked
-        />
-        <label class="btn btn-outline-primary" for="match1v1">1v1</label>
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="matchtype"
-          id="matchTeams"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary" for="matchTeams">Teams</label>
-      </div>
+      <input
+        type="radio"
+        class="btn-check"
+        name="matchtype"
+        id="match1v1"
+        value="1v1"
+        checked
+      />
+      <label class="btn btn-outline-primary" for="match1v1">1v1</label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="matchtype"
+        id="matchTeams"
+        value="Teams"
+      />
+      <label class="btn btn-outline-primary" for="matchTeams">Teams</label>
     </div>
 
     <br />
-
     <div class="card-body d-grid gap-2">
-      <button id="submit" class="btn btn-primary" type="button">
+      <button
+        id="submit"
+        class="btn btn-primary"
+        type="button"
+        onclick="findmatch()"
+      >
         Find Players
       </button>
     </div>
@@ -200,12 +240,12 @@
         <span class="material-icons">message</span>
       </div>
     </footer>
-
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/firebaseAPI_BBY18.js"></script>
+    <script src="./scripts/matchMake.js"></script>
   </body>
 </html>
