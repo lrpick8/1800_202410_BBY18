@@ -29,6 +29,14 @@
       rel="stylesheet"
     />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
@@ -42,7 +50,7 @@
       <div class="container py-2">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="material-icons">person</span>
+                <span class="material-icons">person</span><span id="name-goes-here">Name</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
@@ -76,6 +84,6 @@
 
     <!-- Link to scripts of your own -->
     <script src="./scripts/firebaseAPI_BBY18.js"></script>
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/main.js"></script>
   </body>
 </html>
