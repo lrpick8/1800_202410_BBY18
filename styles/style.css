@@ -1,12 +1,20 @@
    /* General Formatting Across Sites */
 
    h1 {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-}
-   
+       font-family: Arial, sans-serif;
+       font-size: 12px;
+   }
 
-/* matchMake.html styles */
+   /* index.html styles */
+
+   #welcomeMessage {
+       align-items: center;
+       align-content: center;
+       text-align: center;
+   }
+
+
+   /* matchMake.html styles */
 
    /* #findmatch {
         display: table-column;
@@ -15,63 +23,68 @@
         margin-top: 50vh;
     } */
 
-/* login.html styles */
+   /* login.html styles */
 
-    .p-5 mb-4 bg-light rounded-3 {
-        text-align: center;
-    }
+   .p-5 mb-4 bg-light rounded-3 {
+       text-align: center;
+   }
 
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #e0f0ff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
+   body {
+       font-family: Arial, sans-serif;
+       background-color: #e0f0ff;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100vh;
+       margin: 0;
+   }
 
-    #loginform {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 500px;
-    }
+   #loginform {
+       background-color: white;
+       padding: 2rem;
+       border-radius: 8px;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+       width: 100%;
+       max-width: 500px;
+   }
 
-    .main {
-        font-family: Arial, sans-serif;
-        background-color: #e0f0ff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 110vh;
-        margin-top: 30vh;
-    }
-    
+   .main {
+       font-family: Arial, sans-serif;
+       background-color: #e0f0ff;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 110vh;
+       margin-top: 30vh;
+   }
 
-/* main.html styles */    
-    
-   
-    
-/* profile.html styles */
 
-    #profilesave {
-        width: 30px;
-    }
+   /* main.html styles */
 
-    .form-group {
-        margin-bottom: 1.0rem;
-    }
-    
-    .btn {
-        width: 100%;
-        padding: 0.75rem;
-        font-size: 1rem;
-    }
-    
-    .header {
-        margin-bottom: 30vh;
-    }
-    
+
+
+   /* profile.html styles */
+
+   #profilesave {
+       width: 30px;
+   }
+
+   .form-group {
+       margin-bottom: 1.0rem;
+   }
+
+   .btn {
+       width: 100%;
+       padding: 0.75rem;
+       font-size: 1rem;
+   }
+
+   .header {
+       margin-bottom: 20vh;
+   }
+
+   .container {
+       align-items: center;
+       align-content: center;
+       text-align: center;
+   }
