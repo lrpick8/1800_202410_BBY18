@@ -28,7 +28,7 @@ function findmatch() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add a timestamp
         }).then(() => {
             console.log("Match preferences saved successfully.");
-            window.location.href = "thanks.html"; // Redirect to the thank-you page
+            window.location.href = "matching.html"; // Redirect to the thank-you page
         }).catch((error) => {
             console.error("Error saving match preferences: ", error);
         });
