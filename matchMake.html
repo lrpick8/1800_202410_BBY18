@@ -51,26 +51,6 @@
     <!-- Your HTML Layout go here -->
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <!-- <header class="navbar justify-content-evenly bg-info fixed-top">
-      <div class="container py-2">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <span class="material-icons">person</span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
-            <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
-          </ul>
-        </div>
-        <span class="material-icons">settings</span>
-      </div>
-    </header> -->
     <div>
       <h1>Sport</h1>
       <input autocomplete="on" list="suggestions" id="sport" />
@@ -105,45 +85,34 @@
     </div>
 
     <h1>Location</h1>
-    <div class="card-body form-group dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenu"
-        data-bs-toggle="dropdown"
-      >
-        Distance
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-        <li>
-          <button
-            class="dropdown-item location-option"
-            type="button"
-            data-value="50km"
-          >
-            Within 50km
-          </button>
-        </li>
-        <li>
-          <button
-            class="dropdown-item location-option"
-            type="button"
-            data-value="100km"
-          >
-            Within 100km
-          </button>
-        </li>
-        <li>
-          <button
-            class="dropdown-item location-option"
-            type="button"
-            data-value="anywhere"
-          >
-            Anywhere within my City
-          </button>
-        </li>
-      </ul>
-      <input type="hidden" id="location" />
+    <div class="card-body form-group">
+      <input
+        type="radio"
+        class="btn-check"
+        name="location"
+        id="location50km"
+        value="50km"
+        checked
+      />
+      <label class="btn btn-outline-primary" for="location50km">Within 50km</label>
+    
+      <input
+        type="radio"
+        class="btn-check"
+        name="location"
+        id="location100km"
+        value="100km"
+      />
+      <label class="btn btn-outline-primary" for="location100km">Within 100km</label>
+    
+      <input
+        type="radio"
+        class="btn-check"
+        name="location"
+        id="locationAnywhere"
+        value="anywhere"
+      />
+      <label class="btn btn-outline-primary" for="locationAnywhere">Anywhere within my City</label>
     </div>
 
     <h1>Skill Level</h1>
