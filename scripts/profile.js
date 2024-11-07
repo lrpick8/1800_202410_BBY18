@@ -2,12 +2,12 @@
 
 var currentUser;               //points to the document of the user who is logged in
 function populateUserInfo() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if user is signed in:
+    firebase.auth().onAuthStateChanged((user) => {
+        // Check if user is signed in:()
         if (user) {
 
             //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid)
+            currentUser = db.collection("users").doc(user.uid);
             //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
@@ -38,7 +38,7 @@ function populateUserInfo() {
                     if (userSportPreference != null) {
                         document.getElementById("sportPreferenceInput").value = userSportPreference;
                     }
-                })
+                });
         } else {
             // No user is signed in.
             console.log("No user is signed in");
@@ -76,7 +76,7 @@ function saveUserInfo() {
     })
         .then(() => {
             console.log("Document successfully updated!");
-        })
+        });
 
     //c) disable edit 
     document.getElementById('personalInfoFields').disabled = true;
