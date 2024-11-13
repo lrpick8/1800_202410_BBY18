@@ -47,159 +47,152 @@
   </head>
 
   <body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <div>
+    <div class="container mt-5">
       <h1>Sport</h1>
-      <input autocomplete="on" list="suggestions" id="sport" />
+      <input
+        autocomplete="on"
+        list="suggestions"
+        id="sport"
+        class="form-control"
+      />
       <datalist id="suggestions">
-        <option>Soccer</option>
-        <option>Basketball</option>
-        <option>Soccer</option>
-        <option>Basketball</option>
         <option>Soccer</option>
         <option>Basketball</option>
         <option>Tennis</option>
         <option>Baseball</option>
         <option>Volleyball</option>
         <option>Swimming</option>
-        <option>Running</option>
-        <option>Boxing</option>
-        <option>Golf</option>
-        <option>Cricket</option>
-        <option>Table Tennis</option>
-        <option>Badminton</option>
-        <option>Rugby</option>
-        <option>Hockey</option>
-        <option>Gymnastics</option>
-        <option>Skateboarding</option>
-        <option>Surfing</option>
-        <option>Rock Climbing</option>
-        <option>Cycling</option>
-        <option>Martial Arts</option>
-        <option>Martial Arts</option>
-        <option>Martial Arts</option>
       </datalist>
-    </div>
 
-    <h1>Location</h1>
-    <div class="card-body form-group">
-      <input
-        type="radio"
-        class="btn-check"
-        name="location"
-        id="location50km"
-        value="50km"
-        checked
-      />
-      <label class="btn btn-outline-primary" for="location50km">Within 50km</label>
-    
-      <input
-        type="radio"
-        class="btn-check"
-        name="location"
-        id="location100km"
-        value="100km"
-      />
-      <label class="btn btn-outline-primary" for="location100km">Within 100km</label>
-    
-      <input
-        type="radio"
-        class="btn-check"
-        name="location"
-        id="locationAnywhere"
-        value="anywhere"
-      />
-      <label class="btn btn-outline-primary" for="locationAnywhere">Anywhere within my City</label>
-    </div>
+      <h1>Location</h1>
+      <div class="card-body form-group">
+        <input
+          type="radio"
+          class="btn-check"
+          name="location"
+          id="location50km"
+          value="50km"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="location50km"
+          >Within 50km</label
+        >
 
-    <h1>Skill Level</h1>
-    <div class="card-body form-group">
-      <input
-        type="radio"
-        class="btn-check"
-        name="skillLevel"
-        id="skillBeginner"
-        value="Beginner"
-        checked
-      />
-      <label class="btn btn-outline-primary" for="skillBeginner"
-        >Beginner</label
-      >
-      <input
-        type="radio"
-        class="btn-check"
-        name="skillLevel"
-        id="skillSkilled"
-        value="Skilled"
-      />
-      <label class="btn btn-outline-primary" for="skillSkilled">Skilled</label>
-      <input
-        type="radio"
-        class="btn-check"
-        name="skillLevel"
-        id="skillProfessional"
-        value="Professional"
-      />
-      <label class="btn btn-outline-primary" for="skillProfessional"
-        >Professional</label
-      >
-    </div>
+        <input
+          type="radio"
+          class="btn-check"
+          name="location"
+          id="location100km"
+          value="100km"
+        />
+        <label class="btn btn-outline-primary" for="location100km"
+          >Within 100km</label
+        >
 
-    <h1>Mode</h1>
-    <div class="card-body form-group">
-      <input
-        type="radio"
-        class="btn-check"
-        name="mode"
-        id="modeUnranked"
-        value="Unranked"
-        checked
-      />
-      <label class="btn btn-outline-primary" for="modeUnranked">Unranked</label>
-      <input
-        type="radio"
-        class="btn-check"
-        name="mode"
-        id="modeRanked"
-        value="Ranked"
-      />
-      <label class="btn btn-outline-primary" for="modeRanked">Ranked</label>
-    </div>
+        <input
+          type="radio"
+          class="btn-check"
+          name="location"
+          id="locationAnywhere"
+          value="anywhere"
+        />
+        <label class="btn btn-outline-primary" for="locationAnywhere"
+          >Anywhere within my City</label
+        >
+      </div>
 
-    <h1>Matchtype</h1>
-    <div class="card-body form-group">
-      <input
-        type="radio"
-        class="btn-check"
-        name="matchtype"
-        id="match1v1"
-        value="1v1"
-        checked
-      />
-      <label class="btn btn-outline-primary" for="match1v1">1v1</label>
-      <input
-        type="radio"
-        class="btn-check"
-        name="matchtype"
-        id="matchTeams"
-        value="Teams"
-      />
-      <label class="btn btn-outline-primary" for="matchTeams">Teams</label>
-    </div>
+      <h1>Skill Level</h1>
+      <div class="card-body form-group">
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillBeginner"
+          value="Beginner"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="skillBeginner"
+          >Beginner</label
+        >
 
-    <br />
-    <div class="card-body d-grid gap-2">
-      <button
-        id="submit"
-        class="btn btn-primary"
-        type="button"
-        onclick="findmatch()"
-      >
-        Find Players
-      </button>
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillSkilled"
+          value="Skilled"
+        />
+        <label class="btn btn-outline-primary" for="skillSkilled"
+          >Skilled</label
+        >
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="skillLevel"
+          id="skillProfessional"
+          value="Professional"
+        />
+        <label class="btn btn-outline-primary" for="skillProfessional"
+          >Professional</label
+        >
+      </div>
+
+      <h1>Mode</h1>
+      <div class="card-body form-group">
+        <input
+          type="radio"
+          class="btn-check"
+          name="mode"
+          id="modeUnranked"
+          value="Unranked"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="modeUnranked"
+          >Unranked</label
+        >
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="mode"
+          id="modeRanked"
+          value="Ranked"
+        />
+        <label class="btn btn-outline-primary" for="modeRanked">Ranked</label>
+      </div>
+
+      <h1>Match Type</h1>
+      <div class="card-body form-group">
+        <input
+          type="radio"
+          class="btn-check"
+          name="matchtype"
+          id="match1v1"
+          value="1v1"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="match1v1">1v1</label>
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="matchtype"
+          id="matchTeams"
+          value="Teams"
+        />
+        <label class="btn btn-outline-primary" for="matchTeams">Teams</label>
+      </div>
+
+      <div class="card-body d-grid gap-2 mt-4">
+        <button
+          id="findMatchButton"
+          class="btn btn-primary"
+          onclick="findmatch()"
+        >
+          Find Players
+        </button>
+      </div>
     </div>
 
     <footer class="navbar justify-content-evenly bg-info fixed-bottom">
@@ -209,9 +202,6 @@
         <span class="material-icons">message</span>
       </div>
     </footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
     <script src="./scripts/firebaseAPI_BBY18.js"></script>
