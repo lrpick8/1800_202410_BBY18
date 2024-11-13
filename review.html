@@ -52,34 +52,22 @@
             <span class="material-icons">settings</span>
         </div>
     </header>
+
     <main>
         <div class="container">
-            <h1>User Profile </h1>
+            <h1>Review User</h1>
             <form>
                 <fieldset class="mb-3" id="personalInfoFields" disabled>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group" id="addressInput">
-                        <label>Address</label>
-                        <input type="text" id="schoolInput" class="form-control" placeholder="1234 Main Street">
-                    </div>
-                    <div class="form-group">
-                        <label>City</label>
-                        <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
-                    </div>
-                    <div class="form-group" id="genderInput">
-                        <label>Gender</label>
-                        <select data-mdb-select-init multiple data-mdb-placeholder="Gender" multiple>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">Other</option>
-                            <option value="4">Prefer Not to Answer</option>
-                        </select>
+                    <div class="card-body">
+                        <p>Rate your experience against user:</p>
+                        <span class="material-icons star" id="star1">star_outline</span>
+                        <span class="material-icons star" id="star2">star_outline</span>
+                        <span class="material-icons star" id="star3">star_outline</span>
+                        <span class="material-icons star" id="star4">star_outline</span>
+                        <span class="material-icons star" id="star5">star_outline</span>
                     </div>
                     <div class="form-group" id="sportPreferenceInput">
-                        <label>Sport Preference</label>
+                        <label>Sport You Played Against User</label>
                         <datalist id="suggestions">
                             <option>Soccer</option>
                             <option>Basketball</option>
@@ -101,14 +89,17 @@
                             <option>Rock Climbing</option>
                             <option>Cycling</option>
                             <option>Martial Arts</option>
+                            <option>Other</option>
                         </datalist>
                         <input autocomplete="on" list="suggestions" />
                     </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Write your comments here:</label>
+                        <textarea class="form-control" id="description" rows="3"></textarea>
+                    </div>
                 </fieldset>
                 <div class="d-flex justify-content-end mt-5">
-                    <button type="button" onclick="editUserInfo()" class="btn btn-secondary">Edit</button>
-                    <span style="width: 10px"></span>
-                    <button type="button" onclick="saveUserInfo()" class="btn btn-info">Save</button>
+                    <button type="button" class="btn btn-info">Save</button>
                 </div>
                 <div class="d-flex justify-content-end mt-5">
                     <button type="button" onclick="main()" class="btn btn-info">Go to Main Menu</button>
@@ -127,6 +118,6 @@
     </footer>
 
     <script src="./scripts/firebaseAPI_BBY18.js"></script>
-    <script src="./scripts/profile.js"></script>
+    <script src="./scripts/review.js"></script>
 
 </body>
