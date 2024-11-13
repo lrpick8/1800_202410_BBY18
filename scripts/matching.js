@@ -111,3 +111,45 @@ function cancelMatchPreferences() {
     window.location.href = "login.html";
   }
 }
+
+function startTimer() {
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  // Reference to the timer display element
+  const timerDisplay = document.getElementById("timerDisplay");
+
+  // Update the timer every second
+  const timerInterval = setInterval(() => {
+      seconds++;
+
+      // Increment minutes and hours as needed
+      if (seconds === 60) {
+          seconds = 0;
+          minutes++;
+      }
+      if (minutes === 60) {
+          minutes = 0;
+          hours++;
+      }
+
+      // Format the time with leading zeros
+      const formattedTime = 
+          (hours < 10 ? "0" + hours : hours) + ":" +
+          (minutes < 10 ? "0" + minutes : minutes) + ":" +
+          (seconds < 10 ? "0" + seconds : seconds);
+
+      // Update the timer display on the page
+      timerDisplay.textContent = formattedTime;
+  }, 1000); // Update every second
+
+  // Stop the timer if the user clicks "Cancel"
+  document.getElementById("cancel").addEventListener("click", function() {
+      clearInterval(timerInterval);
+      alert("You have canceled the queue.");
+  });
+}
+
+// Start the timer when the page loads
+window.onload = startTimer;
