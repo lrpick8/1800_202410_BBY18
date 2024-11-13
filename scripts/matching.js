@@ -9,47 +9,10 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
-// Function to create a match
-function createMatch(userID1, userID2, matchPreferences) {
-  return new Promise((resolve, reject) => {
-    console.log("=== createMatch() called ===");
-    console.log("User 1:", userID1);
-    console.log("User 2:", userID2);
-    console.log("Preferences:", matchPreferences);
-
-    if (!userID1 || !userID2 || !matchPreferences) {
-      console.error("Error: Missing required parameters for match creation.");
-      reject("Missing parameters");
-      return;
-    }
-
-    db.collection("matches")
-      .add({
-        player1: userID1,
-        player2: userID2,
-        sport: matchPreferences.sport,
-        location: matchPreferences.location,
-        skillLevel: matchPreferences.skillLevel,
-        mode: matchPreferences.mode,
-        matchType: matchPreferences.matchType,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .then((docRef) => {
-        console.log(
-          `Match successfully created with Firestore ID: ${docRef.id}`
-        );
-        resolve();
-      })
-      .catch((error) => {
-        console.error("Error creating match in Firestore:", error);
-        reject(error);
-      });
-  });
-}
-
 let isMatchFound = false; // Global flag to prevent multiple matches
 
-function findMatchingPlayer() {
+// Main function to find a matching player and initiate the match creation
+async function findMatchingPlayer() {
   console.log("=== findMatchingPlayer() called ===");
 
   const user = firebase.auth().currentUser;
@@ -62,71 +25,103 @@ function findMatchingPlayer() {
   const userID = user.uid;
   console.log("Current user ID:", userID);
 
-  // Fetch the current user's match preferences
-  db.collection("matchPreferences")
-    .where("userID", "==", userID)
-    .get()
-    .then((querySnapshot) => {
-      if (querySnapshot.empty) {
-        console.log("No preferences found for this user.");
-        window.location.href = "matchMake.html";
-        return;
-      }
+  try {
+    // Fetch the current user's match preferences
+    const preferencesSnapshot = await db
+      .collection("matchPreferences")
+      .where("userID", "==", userID)
+      .get();
 
-      const userPreferences = querySnapshot.docs[0].data();
-      console.log("User preferences found:", userPreferences);
+    if (preferencesSnapshot.empty) {
+      console.log("No preferences found for this user.");
+      window.location.href = "matchMake.html";
+      return;
+    }
 
-      // Set up real-time listener with `unsubscribe` logic
-      const unsubscribe = db
-        .collection("matchPreferences")
-        .where("sport", "==", userPreferences.sport)
-        .where("location", "==", userPreferences.location)
-        .where("skillLevel", "==", userPreferences.skillLevel)
-        .where("mode", "==", userPreferences.mode)
-        .where("matchType", "==", userPreferences.matchType)
-        .onSnapshot((matchSnapshot) => {
-          if (isMatchFound) {
-            console.log("Match already found, unsubscribing...");
-            unsubscribe(); // Stop listening if a match is already found
-            return;
-          }
+    const userPreferences = preferencesSnapshot.docs[0].data();
+    console.log("User preferences found:", userPreferences);
 
-          matchSnapshot.forEach((doc) => {
-            const matchUserID = doc.data().userID;
+    // Listen for potential matches
+    const unsubscribe = db
+      .collection("matchPreferences")
+      .where("sport", "==", userPreferences.sport)
+      .where("location", "==", userPreferences.location)
+      .where("skillLevel", "==", userPreferences.skillLevel)
+      .where("mode", "==", userPreferences.mode)
+      .where("matchType", "==", userPreferences.matchType)
+      .onSnapshot(async (matchSnapshot) => {
+        if (isMatchFound) {
+          console.log("Match already found, unsubscribing...");
+          unsubscribe();
+          return;
+        }
 
-            // Skip if it's the same user or if a match has already been found
-            if (matchUserID === userID || isMatchFound) return;
+        for (const doc of matchSnapshot.docs) {
+          const matchUserID = doc.data().userID;
+          if (matchUserID === userID || isMatchFound) continue;
 
-            console.log("Match found with user ID:", matchUserID);
-            isMatchFound = true; // Set flag to prevent multiple matches
+          console.log("Match found with user ID:", matchUserID);
+          isMatchFound = true;
+          unsubscribe();
 
-            // Unsubscribe the listener after a match is found
-            unsubscribe();
+          // Fetch user names before creating the match
+          const user1Doc = await db.collection("users").doc(userID).get();
+          const user2Doc = await db.collection("users").doc(matchUserID).get();
 
-            // Create the match and then remove preferences
-            createMatch(userID, matchUserID, userPreferences)
-              .then(() => {
-                removeMatchPreferences(userID);
-                removeMatchPreferences(matchUserID);
-                alert("Match found! Redirecting to match page.");
-                window.location.href = "match.html";
-              })
-              .catch((error) => {
-                console.error("Error creating match:", error);
-              });
-          });
+          const user1Name = user1Doc.exists ? user1Doc.data().name : "Unknown";
+          const user2Name = user2Doc.exists ? user2Doc.data().name : "Unknown";
 
-          if (!isMatchFound) {
-            console.log("No match found yet.");
-          }
-        });
-    })
-    .catch((error) => {
-      console.error("Error retrieving user preferences:", error);
-    });
+          const datePart = new Date().toLocaleDateString();
+          const timePart = new Date().toLocaleTimeString();
+          const formattedTimestamp = `${datePart} ${timePart}`;
+          // Example output: "11/13/2024 2:45 PM"
+
+          // Store the match data locally and in Firestore
+          const foundMatch = {
+            matchID: `match_${userID}_${matchUserID}_${Date.now()}`,
+            player1: userID,
+            player1Name: user1Name,
+            player2: matchUserID,
+            player2Name: user2Name,
+            sport: userPreferences.sport,
+            location: userPreferences.location,
+            skillLevel: userPreferences.skillLevel,
+            mode: userPreferences.mode,
+            matchType: userPreferences.matchType,
+            timestamp: formattedTimestamp,
+          };
+
+          localStorage.setItem("foundMatch", JSON.stringify(foundMatch));
+
+          await createMatch(foundMatch);
+          removeMatchPreferences(userID);
+          removeMatchPreferences(matchUserID);
+
+          alert("Match found! Redirecting to match page.");
+          window.location.href = "match.html";
+        }
+
+        if (!isMatchFound) {
+          console.log("No match found yet.");
+        }
+      });
+  } catch (error) {
+    console.error("Error finding match:", error);
+  }
 }
 
-// Function to remove match preferences
+// Function to create a match document in Firestore
+async function createMatch(matchData) {
+  const { matchID } = matchData;
+  try {
+    await db.collection("matches").doc(matchID).set(matchData);
+    console.log(`Match successfully created with ID: ${matchID}`);
+  } catch (error) {
+    console.error("Error creating match in Firestore:", error);
+  }
+}
+
+// Function to remove match preferences after a match is created
 function removeMatchPreferences(userID) {
   db.collection("matchPreferences")
     .where("userID", "==", userID)
@@ -139,30 +134,6 @@ function removeMatchPreferences(userID) {
     .catch((error) => {
       console.error("Error deleting match preferences:", error);
     });
-}
-
-// Function to cancel match preferences
-function cancelMatchPreferences() {
-  const user = firebase.auth().currentUser;
-  if (user) {
-    const userID = user.uid;
-
-    db.collection("matchPreferences")
-      .where("userID", "==", userID)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          db.collection("matchPreferences").doc(doc.id).delete();
-        });
-        alert("Your matchmaking preferences have been canceled.");
-        window.location.href = "matchMake.html";
-      })
-      .catch((error) => {
-        console.error("Error deleting match preferences:", error);
-      });
-  } else {
-    window.location.href = "login.html";
-  }
 }
 
 // Timer function and event listeners
