@@ -13,11 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Initialize the chat list
 async function initializeChat(currentUserId) {
   const chats = await loadChats(currentUserId);
   const chatListElement = document.getElementById("chatList");
 
-  chatListElement.innerHTML = "";
+  chatListElement.innerHTML = ""; // Clear the chat list
+
+  if (chats.length === 0) {
+    chatListElement.innerHTML = "<li>No chats found.</li>";
+    return;
+  }
+
+  // Populate chat list
   for (const chat of chats) {
     const otherUserId = chat.participants.find((id) => id !== currentUserId);
     const otherUserName = await getUserName(otherUserId);
@@ -27,56 +35,74 @@ async function initializeChat(currentUserId) {
     listItem.onclick = () => loadChatMessages(chat.chatId, currentUserId, otherUserId);
     chatListElement.appendChild(listItem);
   }
-
-  if (chats.length === 0) {
-    chatListElement.innerHTML = "<li>No chats found.</li>";
-  }
 }
 
+// Load chat metadata from Firestore
 async function loadChats(currentUserId) {
-  const chatSnapshot = await db
-    .collection("chats")
-    .where("participants", "array-contains", currentUserId)
-    .get();
+  try {
+    const chatSnapshot = await db
+      .collection("chats")
+      .where("participants", "array-contains", currentUserId)
+      .get();
 
-  return chatSnapshot.docs.map((doc) => ({
-    chatId: doc.id,
-    ...doc.data(),
-  }));
+    return chatSnapshot.docs.map((doc) => ({
+      chatId: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Error loading chats:", error);
+    return [];
+  }
 }
 
+// Load messages for a specific chat
 async function loadChatMessages(chatId, currentUserId, receiverId) {
-  const chatRef = db.collection("chats").doc(chatId);
-  const chatDoc = await chatRef.get();
+  try {
+    const chatRef = db.collection("chats").doc(chatId);
+    const chatDoc = await chatRef.get();
 
-  if (!chatDoc.exists) {
-    alert("Chat does not exist.");
-    return;
-  }
+    if (!chatDoc.exists) {
+      alert("Chat does not exist.");
+      return;
+    }
 
-  const chatData = chatDoc.data();
-  const chatBox = document.getElementById("chatbox");
-  chatBox.innerHTML = "";
+    const chatData = chatDoc.data();
+    const chatBox = document.getElementById("chatbox");
+    chatBox.innerHTML = ""; // Clear the chatbox
 
-  const receiverName = await getUserName(receiverId);
-  document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName} (Chat ID: ${chatId})`;
+    const receiverName = await getUserName(receiverId);
+    document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName} (Chat ID: ${chatId})`;
 
-  console.log("Setting currentChatLabel to:", `Chat with ${receiverName} (Chat ID: ${chatId})`);
+    console.log("Loaded Chat ID:", chatId);
 
-  for (const message of chatData.messages) {
-    const senderName = await getUserName(message.senderId);
-    const messageElement = document.createElement("div");
-    messageElement.textContent = `${senderName}: ${message.text}`;
-    chatBox.appendChild(messageElement);
+    // Display all messages
+    for (const message of chatData.messages || []) {
+      const senderName = message.senderId === currentUserId ? "You" : await getUserName(message.senderId);
+      const messageElement = document.createElement("div");
+      messageElement.textContent = `${senderName}: ${message.text}`;
+      chatBox.appendChild(messageElement);
+    }
+
+    // Save the active chat ID and receiver ID
+    localStorage.setItem("activeChatId", chatId);
+    localStorage.setItem("receiverId", receiverId);
+  } catch (error) {
+    console.error("Error loading chat messages:", error);
   }
 }
 
-
+// Get the username of a user by ID
 async function getUserName(userId) {
-  const userDoc = await db.collection("users").doc(userId).get();
-  return userDoc.exists ? userDoc.data().name : "Unknown User";
+  try {
+    const userDoc = await db.collection("users").doc(userId).get();
+    return userDoc.exists ? userDoc.data().name : "Unknown User";
+  } catch (error) {
+    console.error("Error fetching user name:", error);
+    return "Unknown User";
+  }
 }
 
+// Handle sending a message
 document.getElementById("sendButton").addEventListener("click", async () => {
   const messageInput = document.getElementById("messageInput");
   const message = messageInput.value.trim();
@@ -86,51 +112,42 @@ document.getElementById("sendButton").addEventListener("click", async () => {
     return;
   }
 
-  const currentChatLabel = document.getElementById("currentChatLabel");
-  if (!currentChatLabel) {
-    console.error("Error: currentChatLabel element not found.");
+  const chatId = localStorage.getItem("activeChatId");
+  const receiverId = localStorage.getItem("receiverId");
+
+  if (!chatId || !receiverId) {
+    console.error("Error: Chat ID or Receiver ID is missing.");
+    alert("Error sending message. Please try reloading the page.");
     return;
   }
 
-  console.log("currentChatLabel content:", currentChatLabel.textContent);
-
-  const match = currentChatLabel.textContent.match(/Chat ID: ([^\)]+)/);
-  if (!match) {
-    console.error("Error: No chatId found in currentChatLabel.");
+  if (!message) {
+    console.error("Message input is empty.");
     return;
   }
 
-  const chatId = match[1];
-  console.log("Extracted chatId from currentChatLabel:", chatId);
-
-  if (message && chatId) {
+  try {
     const chatRef = db.collection("chats").doc(chatId);
 
     const newMessage = {
       senderId: currentUserId,
       text: message,
-      timestamp: firebase.firestore.Timestamp.now(), // Use fixed timestamp
+      timestamp: firebase.firestore.Timestamp.now(),
     };
 
-    try {
-      // Add the message to the `messages` array
-      await chatRef.update({
-        messages: firebase.firestore.FieldValue.arrayUnion(newMessage),
-      });
+    // Update Firestore with the new message
+    await chatRef.update({
+      messages: firebase.firestore.FieldValue.arrayUnion(newMessage),
+    });
 
-      console.log("Message sent successfully!");
+    console.log("Message sent successfully!");
 
-      // Clear the input field
-      messageInput.value = "";
+    // Clear the input field
+    messageInput.value = "";
 
-      // Reload the chat messages to display the newly sent message
-      loadChatMessages(chatId, currentUserId, currentChatLabel.textContent.split(" ")[2]); // Assuming the receiver's name is in position 2
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-  } else {
-    console.log("Message input is empty or chatId is missing.");
+    // Reload the chat messages to display the newly sent message
+    await loadChatMessages(chatId, currentUserId, receiverId);
+  } catch (error) {
+    console.error("Error sending message:", error);
   }
 });
-
-
