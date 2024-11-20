@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Landing</title>
+  <title>Chatbox</title>
   <meta name="comp1800 template" content="My 1800 App" />
 
   <!-- Required meta tags -->
@@ -31,13 +31,13 @@
 
   <!-- Link to styles of your own -->
   <link rel="stylesheet" href="./styles/style.css" />
+
 </head>
 
 <body>
   <!------------------------------>
   <!-- Your HTML Layout go here -->
   <!------------------------------>
-  <!-- Stuff for body goes here -->
   <header class="navbar justify-content-evenly bg-info fixed-top">
     <div class="container py-2">
       <div class="dropdown">
@@ -53,22 +53,25 @@
       <span class="material-icons">settings</span>
     </div>
   </header>
-  
-  <main>
-    <div id="welcomeMessage" class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to our Sports Matching App!</h1>
-        <a class="btn btn-primary btn-lg" type="button" href="../matchMake.html">Find a Match</a>
-      </div>
+
+  <div id="centered" class="container" style="margin-top: 100px;">
+    <div id="chatMenu">
+      <h3>Chats</h3>
+      <ul id="chatList"></ul>
     </div>
-  </main>
+    <div id="chatArea">
+      <div id="currentChatLabel"></div>
+      <div id="chatbox"></div>
+      <input type="text" id="messageInput" placeholder="Type your message...">
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
 
   <footer class="navbar justify-content-evenly bg-info fixed-bottom">
     <div class="container py-3">
-      <span class="material-icons">search</span>
+      <span class="material-icons" onclick="window.location.href='/main.html'">search</span>
       <span class="material-icons">map</span>
-      <span class="material-icons" onclick="window.location.href='/chatbox.html'">message</span>
-
+      <span class="material-icons">message</span>
     </div>
   </footer>
 
@@ -78,7 +81,7 @@
 
   <!-- Link to scripts of your own -->
   <script src="./scripts/firebaseAPI_BBY18.js"></script>
-  <script src="./scripts/main.js"></script>
+  <script src="./scripts/chatbox.js"></script>
 </body>
 
 </html>
