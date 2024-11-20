@@ -94,8 +94,6 @@ async function findMatchingPlayer() {
           localStorage.setItem("foundMatch", JSON.stringify(foundMatch));
 
           await createMatch(foundMatch);
-          removeMatchPreferences(userID);
-          removeMatchPreferences(matchUserID);
 
           alert("Match found! Redirecting to match page.");
           window.location.href = "match.html";
@@ -112,29 +110,53 @@ async function findMatchingPlayer() {
 
 // Function to create a match document in Firestore
 async function createMatch(matchData) {
-  const { matchID } = matchData;
+  const { matchID, player1, player2 } = matchData;
   try {
+    // Create the match in Firestore
     await db.collection("matches").doc(matchID).set(matchData);
     console.log(`Match successfully created with ID: ${matchID}`);
+
+    // Remove match preferences for both players
+    await removeMatchPreferences(player1);
+    await removeMatchPreferences(player2);
+
+    console.log("Match preferences removed for both players.");
   } catch (error) {
-    console.error("Error creating match in Firestore:", error);
+    console.error("Error creating match or removing preferences:", error);
   }
 }
 
+
 // Function to remove match preferences after a match is created
-function removeMatchPreferences(userID) {
-  db.collection("matchPreferences")
-    .where("userID", "==", userID)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        db.collection("matchPreferences").doc(doc.id).delete();
-      });
-    })
-    .catch((error) => {
-      console.error("Error deleting match preferences:", error);
+async function removeMatchPreferences(userID) {
+  console.log(`Attempting to delete match preferences for user: ${userID}`);
+
+  try {
+    const querySnapshot = await db
+      .collection("matchPreferences")
+      .where("userID", "==", userID)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.log(`No match preferences found for user: ${userID}`);
+      return; // Exit if no documents found
+    }
+
+    // Delete all matching documents
+    const batch = db.batch();
+    querySnapshot.forEach((doc) => {
+      console.log(`Preparing to delete document ID: ${doc.id}`);
+      batch.delete(doc.ref);
     });
+
+    // Commit the batch delete
+    await batch.commit();
+    console.log(`Successfully deleted match preferences for user: ${userID}`);
+  } catch (error) {
+    console.error("Error deleting match preferences:", error);
+  }
 }
+
 
 // Timer function and event listeners
 function startTimer() {
