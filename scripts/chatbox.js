@@ -6,12 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
       currentUserId = user.uid;
       console.log("Current User ID:", currentUserId);
       initializeChat(currentUserId);
+
+      // Load active chat messages on page load
+      const activeChatId = localStorage.getItem("activeChatId");
+      const receiverId = localStorage.getItem("receiverId");
+
+      if (activeChatId && receiverId) {
+        console.log("Loading active chat on page load...");
+        loadChatMessages(activeChatId, currentUserId, receiverId);
+      } else {
+        console.log("No active chat found to load on page load.");
+      }
     } else {
       alert("Please log in to continue.");
       window.location.href = "login.html";
     }
   });
 });
+
 
 // Initialize the chat list
 async function initializeChat(currentUserId) {
@@ -55,33 +67,43 @@ async function loadChats(currentUserId) {
   }
 }
 
-// Load messages for a specific chat
+let unsubscribeChatListener; // To store the listener and allow cleanup
+
 async function loadChatMessages(chatId, currentUserId, receiverId) {
   try {
     const chatRef = db.collection("chats").doc(chatId);
-    const chatDoc = await chatRef.get();
 
-    if (!chatDoc.exists) {
-      alert("Chat does not exist.");
-      return;
+    // Clear any existing listener before setting up a new one
+    if (unsubscribeChatListener) {
+      unsubscribeChatListener();
     }
-
-    const chatData = chatDoc.data();
-    const chatBox = document.getElementById("chatbox");
-    chatBox.innerHTML = ""; // Clear the chatbox
 
     const receiverName = await getUserName(receiverId);
     document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName} (Chat ID: ${chatId})`;
 
-    console.log("Loaded Chat ID:", chatId);
+    const chatBox = document.getElementById("chatbox");
+    chatBox.innerHTML = ""; // Clear the chatbox
 
-    // Display all messages
-    for (const message of chatData.messages || []) {
-      const senderName = message.senderId === currentUserId ? "You" : await getUserName(message.senderId);
-      const messageElement = document.createElement("div");
-      messageElement.textContent = `${senderName}: ${message.text}`;
-      chatBox.appendChild(messageElement);
-    }
+    // Set up a real-time listener on the chat document
+    unsubscribeChatListener = chatRef.onSnapshot((snapshot) => {
+      if (!snapshot.exists) {
+        alert("Chat does not exist or has been deleted.");
+        return;
+      }
+
+      const chatData = snapshot.data();
+      chatBox.innerHTML = ""; // Clear the chatbox to avoid duplicate messages
+
+      // Display all messages
+      for (const message of chatData.messages || []) {
+        const senderName = message.senderId === currentUserId ? "You" : message.senderName || "Unknown";
+        const messageElement = document.createElement("div");
+        messageElement.textContent = `${senderName}: ${message.text}`;
+        chatBox.appendChild(messageElement);
+      }
+
+      console.log("Chat updated in real-time!");
+    });
 
     // Save the active chat ID and receiver ID
     localStorage.setItem("activeChatId", chatId);
@@ -90,6 +112,7 @@ async function loadChatMessages(chatId, currentUserId, receiverId) {
     console.error("Error loading chat messages:", error);
   }
 }
+
 
 // Get the username of a user by ID
 async function getUserName(userId) {
