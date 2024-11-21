@@ -79,8 +79,18 @@
        font-size: 1rem;
    }
 
-   .header {
-       margin-bottom: 20vh;
+   #buttons {
+    margin-bottom: 20vh;
+    margin-top: -5vh;
+   }
+
+   #gotomain {
+    margin-bottom: 8vh;
+    margin-top: -5vh;
+   }
+
+   #personalInfoFields {
+    margin-top: 22vh;
    }
 
    .container {

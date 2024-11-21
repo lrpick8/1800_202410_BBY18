@@ -53,7 +53,7 @@
         </div>
     </header>
     <main>
-        <div class="container">
+        <div class="container" id="container">
             <h1>User Profile </h1>
             <form>
                 <fieldset class="mb-3" id="personalInfoFields" disabled>
@@ -61,25 +61,26 @@
                         <label>Name</label>
                         <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
                     </div>
-                    <div class="form-group" id="addressInput">
+                    <div class="form-group">
                         <label>Address</label>
-                        <input type="text" id="schoolInput" class="form-control" placeholder="1234 Main Street">
+                        <input type="text" id="addressInput" class="form-control" placeholder="1234 Main Street">
                     </div>
                     <div class="form-group">
                         <label>City</label>
                         <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
                     </div>
-                    <div class="form-group" id="genderInput">
+                    <div class="form-group">
                         <label>Gender</label>
-                        <select data-mdb-select-init multiple data-mdb-placeholder="Gender" multiple>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">Other</option>
-                            <option value="4">Prefer Not to Answer</option>
+                        <select id="genderInput" class="form-control">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer not to answer">Prefer Not to Answer</option>
                         </select>
                     </div>
-                    <div class="form-group" id="sportPreferenceInput">
+                    <div class="form-group">
                         <label>Sport Preference</label>
+                        <input list="suggestions" autocomplete="on" id="sportPreferenceInput" class="form-control"/>
                         <datalist id="suggestions">
                             <option>Soccer</option>
                             <option>Basketball</option>
@@ -102,17 +103,18 @@
                             <option>Cycling</option>
                             <option>Martial Arts</option>
                         </datalist>
-                        <input autocomplete="on" list="suggestions" />
                     </div>
                 </fieldset>
+                <div id="buttons">
                 <div class="d-flex justify-content-end mt-5">
                     <button type="button" onclick="editUserInfo()" class="btn btn-secondary">Edit</button>
                     <span style="width: 10px"></span>
                     <button type="button" onclick="saveUserInfo()" class="btn btn-info">Save</button>
                 </div>
                 <div class="d-flex justify-content-end mt-5">
-                    <button type="button" onclick="main()" class="btn btn-info">Go to Main Menu</button>
+                    <button type="button" onclick="main()" class="btn btn-info" id="gotomain">Go to Main Menu</button>
                     <span style="width: 10px"></span>
+                </div>
                 </div>
             </form>
         </div>
