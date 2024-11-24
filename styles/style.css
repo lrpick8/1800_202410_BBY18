@@ -174,3 +174,7 @@
   #chatList div:hover {
     background-color: #0056b3;
   }
+
+  #currentChatLabel{
+    margin-top: 25px;
+  }
