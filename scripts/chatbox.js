@@ -33,7 +33,7 @@ async function initializeChat(currentUserId) {
   chatListElement.innerHTML = ""; // Clear the chat list
 
   if (chats.length === 0) {
-    chatListElement.innerHTML = "<li>No chats found.</li>";
+    chatListElement.innerHTML = "<div>No chats found.</div>";
     return;
   }
 
@@ -42,7 +42,7 @@ async function initializeChat(currentUserId) {
     const otherUserId = chat.participants.find((id) => id !== currentUserId);
     const otherUserName = await getUserName(otherUserId);
 
-    const listItem = document.createElement("li");
+    const listItem = document.createElement("div");
     listItem.textContent = otherUserName;
     listItem.onclick = () => loadChatMessages(chat.chatId, currentUserId, otherUserId);
     chatListElement.appendChild(listItem);
@@ -79,7 +79,7 @@ async function loadChatMessages(chatId, currentUserId, receiverId) {
     }
 
     const receiverName = await getUserName(receiverId);
-    document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName} (Chat ID: ${chatId})`;
+    document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName}`;
 
     const chatBox = document.getElementById("chatbox");
     chatBox.innerHTML = ""; // Clear the chatbox

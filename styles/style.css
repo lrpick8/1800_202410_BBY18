@@ -99,26 +99,7 @@
        text-align: center;
    }
 
-    /* chatbox.html styles */
-   #chatOptions {
-    margin: 20px 0;
-    text-align: center;
-  }
-  
-  #chatOptions button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #chatOptions button:hover {
-    background-color: #0056b3;
-  }
+  /* chatbox.html styles */
   
   #chatbox {
     width: 100%;
@@ -144,15 +125,6 @@
   
   #chatbox div:nth-child(odd) {
     background-color: #d1e7ff;
-  }
-  
-  #chatbox div .sender {
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  #chatbox div .text {
-    margin-left: 10px;
   }
   
   #messageInput {
@@ -184,4 +156,25 @@
     flex-direction: column;
   }
 
-  
+  #chatList div {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #chatList div:hover {
+    background-color: #0056b3;
+  }
+
+  #currentChatLabel{
+    margin-top: 25px;
+  }
