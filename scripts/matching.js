@@ -156,8 +156,6 @@ async function removeMatchPreferences(userID) {
     console.error("Error deleting match preferences:", error);
   }
 }
-
-
 // Timer function and event listeners
 function startTimer() {
   let hours = 0,
