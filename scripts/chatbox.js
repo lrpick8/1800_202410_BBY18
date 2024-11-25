@@ -33,7 +33,7 @@ async function initializeChat(currentUserId) {
   chatListElement.innerHTML = ""; // Clear the chat list
 
   if (chats.length === 0) {
-    chatListElement.innerHTML = "<li>No chats found.</li>";
+    chatListElement.innerHTML = "<div>No chats found.</div>";
     return;
   }
 
@@ -42,7 +42,7 @@ async function initializeChat(currentUserId) {
     const otherUserId = chat.participants.find((id) => id !== currentUserId);
     const otherUserName = await getUserName(otherUserId);
 
-    const listItem = document.createElement("li");
+    const listItem = document.createElement("div");
     listItem.textContent = otherUserName;
     listItem.onclick = () => loadChatMessages(chat.chatId, currentUserId, otherUserId);
     chatListElement.appendChild(listItem);
@@ -79,7 +79,7 @@ async function loadChatMessages(chatId, currentUserId, receiverId) {
     }
 
     const receiverName = await getUserName(receiverId);
-    document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName} (Chat ID: ${chatId})`;
+    document.getElementById("currentChatLabel").textContent = `Chat with ${receiverName}`;
 
     const chatBox = document.getElementById("chatbox");
     chatBox.innerHTML = ""; // Clear the chatbox
@@ -174,3 +174,23 @@ document.getElementById("sendButton").addEventListener("click", async () => {
     console.error("Error sending message:", error);
   }
 });
+
+function insertNameFromFirestore() {
+  // Check if the user is logged in:
+  firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+          console.log(user.uid); // Let's know who the logged-in user is by logging their UID
+          currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
+          currentUser.get().then(userDoc => {
+              // Get the user name
+              let userName = userDoc.data().name;
+              console.log(userName);
+              //$("#name-goes-here").text(userName); // jQuery
+              document.getElementById("name-goes-here").innerText = userName;
+          })
+      } else {
+          console.log("No user is logged in."); // Log a message when no user is logged in
+      }
+  })
+}
+insertNameFromFirestore();
