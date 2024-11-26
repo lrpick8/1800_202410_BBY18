@@ -57,13 +57,21 @@
   <div id="centered" class="container">
     <div id="chatMenu">
       <h3>Chats</h3>
-      <div id="chatList"></div>
+      <div>
+        <label for="chatDropdown">Select a chat:</label>
+        <select id="chatDropdown">
+          <option value="">Select a chat</option> <!-- Default option -->
+        </select>
+      </div>      
     </div>
     <div id="chatArea">
-      <h5 id="currentChatLabel"></h5>
-      <div id="chatbox"></div>
-      <input type="text" id="messageInput" placeholder="Type your message...">
-      <button id="sendButton">Send</button>
+      <div id="chatArea">
+        <h5 id="currentChatLabel"></h5>
+        <div id="chatbox"></div>
+        <input type="text" id="messageInput" placeholder="Type your message...">
+        <button id="sendButton">Send</button>
+        <button id="leaveChatButton">Leave Chat</button> <!-- New Button -->
+      </div>      
     </div>
   </div>
 
