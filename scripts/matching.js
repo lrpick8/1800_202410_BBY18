@@ -10,6 +10,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 let isMatchFound = false; // Global flag to prevent multiple matches
+let timerInterval; // Global variable for the timer
 
 // Main function to find a matching player and initiate the match creation
 async function findMatchingPlayer() {
@@ -126,7 +127,6 @@ async function createMatch(matchData) {
   }
 }
 
-
 // Function to remove match preferences after a match is created
 async function removeMatchPreferences(userID) {
   console.log(`Attempting to delete match preferences for user: ${userID}`);
@@ -156,6 +156,7 @@ async function removeMatchPreferences(userID) {
     console.error("Error deleting match preferences:", error);
   }
 }
+
 // Timer function and event listeners
 function startTimer() {
   let hours = 0,
@@ -163,7 +164,7 @@ function startTimer() {
     seconds = 0;
   const timerDisplay = document.getElementById("timerDisplay");
 
-  const timerInterval = setInterval(() => {
+  timerInterval = setInterval(() => {
     seconds++;
     if (seconds === 60) {
       seconds = 0;
@@ -178,12 +179,29 @@ function startTimer() {
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
-
-  document.getElementById("cancel").addEventListener("click", () => {
-    clearInterval(timerInterval);
-    alert("You have canceled the queue.");
-  });
 }
+
+// Add event listener to the cancel button
+document.getElementById("cancel").addEventListener("click", async () => {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    console.error("No user is signed in. Unable to cancel match preferences.");
+    return;
+  }
+
+  const userID = user.uid;
+
+  // Call removeMatchPreferences and stop the timer
+  clearInterval(timerInterval); // Stop the timer
+  try {
+    await removeMatchPreferences(userID);
+    alert("You have canceled the queue.");
+    window.location.href = "main.html"; // Redirect to the main page or any desired page
+  } catch (error) {
+    console.error("Error canceling match preferences:", error);
+    alert("Failed to cancel the queue. Please try again.");
+  }
+});
 
 // Ensure timer starts only after the page loads
 window.onload = startTimer;
