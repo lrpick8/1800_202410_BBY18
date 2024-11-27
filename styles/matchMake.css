@@ -1,0 +1,25 @@
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+
+}
+
+#logo {
+ max-width: 10vw;
+ max-height: 10vh;
+ width: auto;
+ height: auto;
+ display: block;
+}
+
+main {
+    margin-top: 14vh;
+    margin-bottom: 14vh;
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+
+#findMatchButton {
+    max-width: 50%;
+}
+

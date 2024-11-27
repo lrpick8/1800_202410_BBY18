@@ -5,6 +5,22 @@
        font-size: 12px;
    }
 
+   #logo {
+    max-width: 10vw;
+    max-height: 10vh;
+    width: auto;
+    height: auto;
+    display: block;
+   }
+
+   /* .dropdown {
+    background-color: #007bff
+   } */
+
+   /* #dropdownMenuButton1 {
+    background-color: #007bff;
+   } */
+
    /* index.html styles */
 
    #welcomeMessage {
@@ -48,14 +64,15 @@
        max-width: 500px;
    }
 
-   .main {
+   main {
        font-family: Arial, sans-serif;
        background-color: #e0f0ff;
        display: flex;
        justify-content: center;
        align-items: center;
        height: 110vh;
-       margin-top: 30vh;
+       margin-top: 20vh;
+       margin-bottom: 20vh;
    }
 
 
