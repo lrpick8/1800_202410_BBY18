@@ -116,118 +116,127 @@
        text-align: center;
    }
 
-  /* chatbox.html styles */
-  
-  #chatbox {
-    width: 100%;
-    max-width: 500px;
-    height: 400px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  #chatbox div {
-    padding: 8px;
-    margin-bottom: 10px;
-    background-color: #e9f5ff;
-    border-radius: 10px;
-    font-size: 14px;
-    word-wrap: break-word;
-  }
-  
-  #chatbox div:nth-child(odd) {
-    background-color: #d1e7ff;
-  }
-  
-  #messageInput {
-    width: 75%;
-    max-width: 400px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  
-  #sendButton {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  #sendButton:hover {
-    background-color: #0056b3;
-  }
 
-  #centered{
-    flex-direction: column;
-  }
+/** Chatbox.html styling */
+#centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
 
-  #chatList div {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+/* Chat Menu Styling */
+#chatMenu {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  #chatList div:hover {
-    background-color: #0056b3;
-  }
+#chatDropdown {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  #currentChatLabel{
-    margin-top: 25px;
-  }
+#chatDropdown:focus {
+  outline: none;
+  border-color: #007bff;
+}
 
-  #leaveChatButton {
-    padding: 10px 15px;
-    background-color: #dc3545; /* Bootstrap Danger Red */
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  #leaveChatButton:hover {
-    background-color: #c82333; /* Darker Danger Red */
-  }
+/* Chat Area Styling */
+#chatArea {
+  width: 100%;
+  max-width: 500px;
+  background: #B8E1FF;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  box-sizing: border-box;
+}
 
-  #chatDropdown {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  #chatDropdown:focus {
-    outline: none;
-    border-color: #007bff;
-  }
+#chatbox {
+  height: 300px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 3px solid #ffffff;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+#chatbox div {
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #e9f5ff;
+  border-radius: 10px;
+  font-size: 14px;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+#chatbox div:nth-child(odd) {
+  background-color: #d1e7ff;
+}
+
+/* Chat Controls */
+#messageInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+#sendButton,
+#leaveChatButton {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 5px auto;
+  display: block;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#sendButton{
+  background-color: #007bff;
+}
+
+#sendButton:hover {
+  background-color: #0056b3;
+}
+
+#leaveChatButton {
+  background-color: #dc3545;
+}
+
+#leaveChatButton:hover {
+  background-color: #c82333;
+}
+
+/* Chat Label Styling */
+#currentChatLabel {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+/** Chatbox.html styling ends */
 
   /* Timer Display */
 #timerDisplay {
