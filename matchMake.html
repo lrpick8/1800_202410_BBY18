@@ -49,20 +49,20 @@
   <body class="match-make">
     <header class="navbar justify-content-evenly bg-info fixed-top">
       <div class="container py-2">
-          <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="material-icons">person</span><span id="name-goes-here">Name</span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
-                  <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
-              </ul>
-          </div>
-          <span class="material-icons"><img id="logo" src="./img/PlayPalLogo.png" alt="logo" onclick="window.location.href='/main.html'"></span>
-          <span class="material-icons">settings</span>
+        <span class="material-icons" id="logo"><img id="logoimage" src="./img/PlayPalLogo.png" alt="logo" onclick="window.location.href='/main.html'"></span>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="material-icons">person</span><span id="name-goes-here">Name</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="../profile.html">Profile</a></li>
+            <li><a class="dropdown-item">Settings</a></li>
+            <li><a class="dropdown-item" href="../index.html">Sign out</a></li>
+          </ul>
+        </div>
       </div>
-  </header>
+    </header>
 
     <main>
     <div class="container mt-5">
