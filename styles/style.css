@@ -15,6 +15,7 @@
     grid-column: 2;
     align-content: center;
     text-align: center;
+    cursor: pointer;
    }
 
    #logoimage {
@@ -27,6 +28,7 @@
     grid-column: 2;
     align-content: center;
     text-align: center;
+    cursor: pointer;
    }
 
    header {
@@ -40,6 +42,7 @@
     grid-column: 1;
     align-content: left;
     text-align: left;
+    cursor: pointer;
    }
 
    #settings {
@@ -50,9 +53,9 @@
     align-self: right;
    }
 
-
-
-
+   .material-icons {
+    cursor: pointer;
+   }
 
    /* .dropdown {
     background-color: #007bff

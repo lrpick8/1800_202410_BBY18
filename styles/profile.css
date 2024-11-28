@@ -47,19 +47,21 @@ h1 {
  grid-column: 2;
  align-content: center;
  text-align: center;
+ cursor: pointer;
 }
 
 #logoimage {
- max-width: 10vw;
- max-height: 10vh;
- width: auto;
- height: auto;
- display: block;
- grid-row: 1;
- grid-column: 2;
- align-content: center;
- text-align: center;
-}
+    max-width: 10vw;
+    max-height: 10vh;
+    width: auto;
+    height: auto;
+    display: block;
+    grid-row: 1;
+    grid-column: 2;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+   }
 
 header {
  display: grid;
@@ -85,3 +87,7 @@ header {
 main {
     margin-top: -10vh;
 }
+
+.material-icons {
+    cursor: pointer;
+   }
