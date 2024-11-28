@@ -1,0 +1,87 @@
+#profilesave {
+    width: 30px;
+}
+
+.form-group {
+    margin-bottom: 1.0rem;
+}
+
+.btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+#buttons {
+ margin-bottom: 20vh;
+ margin-top: -5vh;
+}
+
+#gotomain {
+ margin-bottom: 8vh;
+ margin-top: -5vh;
+}
+
+#personalInfoFields {
+ margin-top: 22vh;
+}
+
+.container {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+#logo {
+ max-width: 10vw;
+ max-height: 10vh;
+ width: auto;
+ height: auto;
+ display: block;
+ grid-row: 1;
+ grid-column: 2;
+ align-content: center;
+ text-align: center;
+}
+
+#logoimage {
+ max-width: 10vw;
+ max-height: 10vh;
+ width: auto;
+ height: auto;
+ display: block;
+ grid-row: 1;
+ grid-column: 2;
+ align-content: center;
+ text-align: center;
+}
+
+header {
+ display: grid;
+ grid-template-columns: 32vw 32vw 32vw;
+ grid-template-rows: 10vh;
+}
+
+#dropdownMenuButton1 {
+ grid-row: 1;
+ grid-column: 1;
+ align-content: left;
+ text-align: left;
+}
+
+#settings {
+ grid-row: 1;
+ grid-column: 3;
+ align-content: right;
+ text-align: right;
+ align-self: right;
+}
+
+main {
+    margin-top: -10vh;
+}
