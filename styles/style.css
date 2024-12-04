@@ -292,8 +292,14 @@
   border-radius: 10px;
   padding: 10px 20px;
   margin-bottom: 20px;
-  width: fit-content;
+  height:auto;
   flex-direction: column;
+}
+
+.matchPage {
+  display: flex;
+  flex-direction: column;
+  height: auto;
 }
 
 /* Cancel Button */
