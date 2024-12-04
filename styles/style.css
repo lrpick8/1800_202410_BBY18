@@ -293,6 +293,7 @@
   padding: 10px 20px;
   margin-bottom: 20px;
   width: fit-content;
+  flex-direction: column;
 }
 
 /* Cancel Button */
@@ -305,6 +306,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex-direction: column;
 }
 
 #cancel:hover {
