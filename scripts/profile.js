@@ -1,5 +1,6 @@
 var currentUser; //points to the document of the user who is logged in
 
+
 function populateUserInfo() {
   firebase.auth().onAuthStateChanged((user) => {
     // Check if user is signed in:()
