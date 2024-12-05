@@ -151,7 +151,8 @@ async function loadChatMessages(chatId, currentUserId, receiverId) {
         }
 
         const messageElement = document.createElement("div");
-        messageElement.textContent = `${senderName}: ${message.text}`;
+        // messageElement.textContent = `${senderName}: ${message.text}`;
+        messageElement.textContent = `${message.text}`;
         messageElement.className = message.senderId === currentUserId ? "sentMessage" : "receivedMessage";
         chatBox.appendChild(messageElement);
       }
