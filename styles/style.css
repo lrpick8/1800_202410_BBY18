@@ -291,6 +291,43 @@
 
 /* end of chat */
 
+ /* Timer Display */
+ #timerDisplay {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  height:auto;
+  flex-direction: column;
+}
+
+.matchPage {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+/* Cancel Button */
+#cancel {
+  background-color: #dc3545;
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-direction: column;
+}
+
+#cancel:hover {
+  background-color: #c82333;
+}
+
 /* Match Information */
 #matchInfo {
   margin-top: 30px;
