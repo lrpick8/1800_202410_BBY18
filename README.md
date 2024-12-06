@@ -20,7 +20,13 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 * HTML5, CSS, JavaScript
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
-* 
+* CoPilot AI (used to generate the PlayPal logo).
+* ChatGPT 4.0 mini (used to annotate code)
+* iMessage: Used for informal communication among team members for quick updates. All team members have iPhones, so it simplifies communication.
+* Trello: Tracks sprint progress, assigns tasks, and monitors completion stages.
+* Figma: Facilitates collaborative design, prototyping, and layout planning.
+* GitHub: Serves as the central repository for version control, enabling team collaboration, code review, and tracking changes throughout the development process.
+
 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
@@ -80,11 +86,34 @@ Content of the project folder:
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
 ├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
+    /PlayPalLogo             # Logo Generated from CoPilot AI. 
 ├── scripts                  # Folder for scripts
-    /blah.js                 # 
+    /authentication.js       # File linked to login.html. Provides the script for the user to login and writes to firebase.
+    /chatbox.js              # File linked to chatbox.html. Provides the script for the user to chat with another user. Contains several async    
+                                functions that writes/reads from database constantly. 
+    /firebaseAPI_BBY.js      # File containing all firebase API keys for our specific project.
+    /main.js                 # File linked to main.html. Provides script to read name from firestore and place it over the dropdown menu in the 
+                                navbar.
+    /match.js                # File linked to match.html. Provides script to read/write match details to/from firestore, hides items when details
+                                are loaded.
+    /matchHistory.js         # File linked to matchHistory.html. Provides script to read from database to display the matches a user has engaged
+                                in. Not fully implemented.
+    /matching.js             # File linked to matching.html. Provides script to match two users together based on match preferences that is read
+                                from the firestore database.
+    /matchMake.js            # File linked to matchMake.html. Provides script to write match preferences into firestore so they can be used to
+                                begin/join a queue.
+    /profile.js              # File linked to profile.html. Provides script to write changes of the user's details into firestore, reads from 
+                                database to show user their currently saved settings.
+    /review.js               # File linked to review.html. Provides script to write reviews/reports for a given userID into firestore. Reads from  
+                                firestore to gather data from match history and user details.
+    /script.js               # File for general scripts. Used to house the logout function to sign the user out of their account and return them
+                                to index.html.
 ├── styles                   # Folder for styles
-    /blah.css                # 
+    /matchMake.css           # Styling file for matchMake.html. Customizes the main list of match preferences, parallels main styling elements from
+                                style.css.
+    /profile.css             # Styling file for profile.html. Main job is to ensure all list items have the same spacing and colour scheme of
+                                buttons are slightly different.
+    /style.css               # Styling file for all pages. Contains general page to page styling elements consistent everywhere on web app.
 
 
 
