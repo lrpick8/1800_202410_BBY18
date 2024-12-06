@@ -1,6 +1,7 @@
 var currentUser; //points to the document of the user who is logged in
 
-
+// Framework used from Demo #9 in COMP 1800. Altered slightly with gender and sport preference for our specific app.
+// Reads from the database and automatically populates user's details.
 function populateUserInfo() {
   firebase.auth().onAuthStateChanged((user) => {
     // Check if user is signed in:()
@@ -55,6 +56,8 @@ function editUserInfo() {
   document.getElementById("personalInfoFields").disabled = false;
 }
 
+// When user clicks on Save, it writes to Firestore and disables editing until edit is pressed again. 
+// Framework used from Demo #9 in COMP 1800, updated for specific app.
 function saveUserInfo() {
 
   //a) get user entered values
@@ -69,12 +72,6 @@ function saveUserInfo() {
   console.log("Address: " + userAddress); 
   console.log("Gender: " + userGender); 
   console.log("Sport Preference: " + userSportPreference);
-
-  //Validate input
-  // if (!userName || !userCity || !userAddress || !userGender || !userSportPreference) {
-  //   alert("Please fill in all fields.");
-  //   return;
-  // }
 
   //b) update user's document in Firestore
   currentUser.update({
@@ -103,6 +100,7 @@ function main() {
   window.location.href = "main.html";
 }
 
+// To post user's name for user customization in top left dropdown menu.
 function insertNameFromFirestore() {
   // Check if the user is logged in:
   firebase.auth().onAuthStateChanged(user => {

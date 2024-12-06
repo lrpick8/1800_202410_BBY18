@@ -20,7 +20,7 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 * HTML5, CSS, JavaScript
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
-* CoPilot AI (used to generate the PlayPal logo).
+* CoPilot AI (used to generate the PlayPal logo which is in the img folder under PlayPalLogo.png).
 * ChatGPT 4.0 mini (used to annotate code)
 * iMessage: Used for informal communication among team members for quick updates. All team members have iPhones, so it simplifies communication.
 * Trello: Tracks sprint progress, assigns tasks, and monitors completion stages.

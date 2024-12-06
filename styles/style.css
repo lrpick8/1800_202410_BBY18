@@ -74,14 +74,8 @@
    }
 
 
-   /* matchMake.html styles */
+   /* matchMake.html styles (found on MatchMake.css) */
 
-   /* #findmatch {
-        display: table-column;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50vh;
-    } */
 
    /* login.html styles */
 
@@ -124,7 +118,7 @@
 
 
 
-   /* profile.html styles */
+   /* profile.html styles (others found on profile.css) */
 
    #profilesave {
        width: 30px;
@@ -162,7 +156,7 @@
 
 
 /* General Formatting Across Sites */
-/* [Your existing general styles remain unchanged] */
+
 
 /** Chatbox.html styling */
 

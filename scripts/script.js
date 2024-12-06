@@ -1,6 +1,5 @@
-//------------------------------------------------
-// Call this function when the "logout" button is clicked
-//-------------------------------------------------
+
+// Logs the user out when button is clicked, returns to index.html. Used from Demo #7 in COMP1800.
 function logout() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
@@ -10,7 +9,3 @@ function logout() {
       });
 }
 
-function sayHello() {
-    
-}
-//sayHello();

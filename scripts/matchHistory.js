@@ -3,4 +3,5 @@ function main() {
   }
 
 // need to make function to have title disappear when a user has a match history. 
-// Add JS function to add the match history into the templates on html
+// Add JS function to add the match history into the templates on html.
+// All secondary functions to be updated in Next Steps. 

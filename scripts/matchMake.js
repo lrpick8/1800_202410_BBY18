@@ -42,6 +42,7 @@ function findmatch() {
   }
 }
 
+// To post user's name for user customization in top left dropdown menu.
 function insertNameFromFirestore() {
   // Check if the user is logged in:
   firebase.auth().onAuthStateChanged(user => {

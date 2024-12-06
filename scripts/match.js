@@ -16,6 +16,7 @@ function initializeMatch(currentUserId) {
   displayMatchDetails(currentUserId);
 }
 
+// Function to display the Match Details if a match is found.
 async function displayMatchDetails(currentUserId) {
   const matchInfoDiv = document.getElementById("matchInfo");
   const foundMatch = JSON.parse(localStorage.getItem("foundMatch"));
@@ -27,7 +28,7 @@ async function displayMatchDetails(currentUserId) {
     alert("Error loading match. Please try again.");
     return;
   }
-
+// Place the details onto match.html.
   matchInfoDiv.innerHTML = `
     <p>Player 1: ${foundMatch.player1Name}</p>
     <p>Player 2: ${foundMatch.player2Name}</p>
@@ -62,6 +63,7 @@ async function displayMatchDetails(currentUserId) {
   matchInfoDiv.appendChild(goToChatButton);
 }
 
+// Sends matched users to chat.
 async function createChat(userId1, userId2) {
   const chatId = [userId1, userId2].sort().join("_");
   const chatRef = db.collection("chats").doc(chatId);

@@ -1,3 +1,4 @@
+// Dual function from Demo #7 in Comp1800, used to confirm a user is signed in and place in the console.
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -16,8 +17,8 @@ function getNameFromAuth() {
         }
     });
 }
-//getNameFromAuth(); //run the function
 
+// To post user's name for user customization in top left dropdown menu.
 function insertNameFromFirestore() {
     // Check if the user is logged in:
     firebase.auth().onAuthStateChanged(user => {
